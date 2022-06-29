@@ -5,7 +5,8 @@ const MongoClient = mongo.MongoClient;
 const dotenv = require('dotenv');
 dotenv.config()
 let port = process.env.PORT || 8230;
-const mongoUrl = "mongodb+srv://local:test12345@cluster0.f8vmc.mongodb.net/augintern?retryWrites=true&w=majority";
+//const mongoUrl = "mongodb+srv://local:test12345@cluster0.f8vmc.mongodb.net/augintern?retryWrites=true&w=majority";
+const mongoUrl = process.env.mongoLiveUrl;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const token = "8fbf8tyyt87378";
@@ -155,12 +156,15 @@ app.delete('/deleteOrders',(req,res)=>{
 
 //update orders
 app.put('/updateOrder/:id',(req,res) => {
-    let oId = mongo.ObjectId(req.params.id);
+    console.log(">>>id",req.params.id)
+    console.log(">>>id",req.body)
+    let oId = Number(req.params.id)
     db.collection('orders').updateOne(
-        {_id:oId},
+        {id:oId},
         {$set:{
             "status":req.body.status,
-            "bank_name":req.body.bankName
+            "bank_name":req.body.bank_name,
+            "date":req.body.date
         }},(err,result) => {
             if(err) throw err
             res.send(`Status Updated to ${req.body.status}`)
