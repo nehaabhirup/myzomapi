@@ -29,6 +29,13 @@ app.get('/location',(req,res)=>{
     })
 })
 
+app.get('/quicksearch',(req,res)=>{
+    db.collection('mealtypes').find().toArray((err,result)=>{
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
 //restaurants
 app.get('/restaurants/',(req,res) => {
     // let id = req.params.id;
