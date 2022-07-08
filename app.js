@@ -175,7 +175,7 @@ app.put('/updateOrder/:id',(req,res) => {
 // Connection with db
 MongoClient.connect(mongoUrl, (err,client) => {
     if(err) console.log(`Error while connecting`);
-    db = client.db('augintern');
+    db = client.db('zomato');
     app.listen(port,() => {
         console.log(`Server is running on port ${port}`)
     })
