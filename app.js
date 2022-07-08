@@ -22,15 +22,11 @@ app.get('/',(req,res) => {
 })
 
 //location
-app.get('/location',(req,res) => {
-    if(req.query.token === token){
-        db.collection('location').find().toArray((err,result) => {
-            if(err) throw err;
-            res.send(result)
-        })
-    }else{
-        res.send('Unauthorise')
-    }
+app.get('/location',(req,res)=>{
+    db.collection('location').find().toArray((err,result)=>{
+        if(err) throw err;
+        res.send(result)
+    })
 })
 
 //restaurants
